@@ -32,6 +32,7 @@ __version__ = '0.1.9'
 class ErrorCode(enum.Enum):
     S100 = 'First argument on the same line'
     S101 = 'Multi-line construct missing trailing comma'
+    S102 = 'Multi-line construct has some entities on the same line'
 
 
 class Flake8Checker(object):
@@ -119,6 +120,8 @@ def _process_parameters(parameters):
 
     if last_element.type != token.COMMA and no_variadic_arguments:
         yield _error(last_element, ErrorCode.S101)
+
+    import pdb; pdb.set_trace()
 
 
 def _is_unpacking_element(element):
