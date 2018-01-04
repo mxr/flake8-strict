@@ -121,7 +121,9 @@ def _process_parameters(parameters):
     if last_element.type != token.COMMA and no_variadic_arguments:
         yield _error(last_element, ErrorCode.S101)
 
-    import pdb; pdb.set_trace()
+    num_lines = len({e.get_lineno() for e in elements})
+    if num_lines > 1 and num_lines != len(elements):
+        yield _error(last_element, ErrorCode.S102)
 
 
 def _is_unpacking_element(element):
